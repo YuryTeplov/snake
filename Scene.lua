@@ -1,9 +1,15 @@
+require "Head"
+
 Scene = {}
 
 function Scene:new()
     local public = {}
     local private = {}
 
+    private.head = Head:new(1, 1)
+
+    private.dtBatery = 0
+    private.timeOfTick = 0.3
     
 
     function public:load()
@@ -11,11 +17,17 @@ function Scene:new()
     end
 
     function public:update(dt)
+        private.dtBatery = private.dtBatery + dt
+
+        if private.dtBatery >= private.timeOfTick then
+            private.head:tick()
+            private.dtBatery = private.dtBatery - private.timeOfTick
+        end
 
     end
 
     function public:draw()
-
+        private.head:draw()
     end
 
     setmetatable(public, self)
