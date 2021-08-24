@@ -13,6 +13,10 @@ function Block:new(posX, posY)
         return private.positionX, private.positionY
     end
 
+    function public:getSize()
+        return private.size
+    end
+
     function public:changePosition(dx, dy)
         private.positionX = private.positionX + dx
         private.positionY = private.positionY + dy
@@ -21,6 +25,9 @@ function Block:new(posX, posY)
     function public:setPosition(px, py)
         private.positionX = px
         private.positionY = py
+    end
+
+    function public:tick()
     end
 
     function public:draw()

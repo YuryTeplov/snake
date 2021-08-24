@@ -1,4 +1,5 @@
 require "Head"
+require "Apple"
 
 Scene = {}
 
@@ -7,6 +8,9 @@ function Scene:new()
     local private = {}
 
     private.head = Head:new(1, 1)
+    private.actors = {}
+
+    table.insert(private.actors, Apple:new(4, 4))
 
     private.dtBatery = 0
     private.timeOfTick = 0.3
@@ -22,12 +26,20 @@ function Scene:new()
         if private.dtBatery >= private.timeOfTick then
             private.head:tick()
             private.dtBatery = private.dtBatery - private.timeOfTick
-        end
 
+            for k,v in pairs(private.actors) do
+                v:tick()
+            end
+        end
     end
 
     function public:draw()
         private.head:draw()
+
+        for k,v in pairs(private.actors) do
+			v:draw()
+		end
+
     end
 
     function public:control(key)
