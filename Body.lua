@@ -5,14 +5,14 @@ Body = {}
 
 extended(Body, Block)
 
-function Body:new(px, py, target)
-    local public = Block.new(self, px, py)
+function Body:new(target) 
+    local public = Block.new(self, target:getPosition())
     local private = {}
 
     private.target = target
 
     function public:tick()
-        public:setPosition(private.target:getPosition)
+        public:setPosition(private.target:getPosition())
     end
 
     function public:getType()

@@ -1,5 +1,6 @@
 require "Head"
 require "Apple"
+require "Body"
 
 Scene = {}
 
@@ -12,6 +13,7 @@ function Scene:new()
     private.score = 0
 
     table.insert(private.actors, Apple:new(4, 4))
+    table.insert(private.actors, Body:new(private.head))
 
     private.dtBatery = 0
     private.timeOfTick = 0.3
@@ -28,6 +30,8 @@ function Scene:new()
                     private.score = private.score + 1
                     local apple = private.actors[1]
                     apple:changePosition(1, 1)
+
+                    table.insert(private.actors, Body:new(private.actors[#private.actors]))
                 end
             end
         end
@@ -38,14 +42,15 @@ function Scene:new()
         private.dtBatery = private.dtBatery + dt
 
         if private.dtBatery >= private.timeOfTick then
-            private.head:tick()
-            private.dtBatery = private.dtBatery - private.timeOfTick
-
-            for k,v in pairs(private.actors) do
-                v:tick()
+            for i = #private.actors, 1, -1 do
+                private.actors[i]:tick()
             end
 
+            private.head:tick()
+
             private:checkCollisions()
+
+            private.dtBatery = private.dtBatery - private.timeOfTick
 
         end
     end
