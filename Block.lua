@@ -17,6 +17,10 @@ function Block:new(posX, posY)
         return private.size
     end
 
+    function public:checkCollisions(x, y)
+        return private.positionX == x and private.positionY == y
+    end
+
     function public:changePosition(dx, dy)
         private.positionX = private.positionX + dx
         private.positionY = private.positionY + dy

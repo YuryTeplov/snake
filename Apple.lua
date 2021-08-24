@@ -9,10 +9,6 @@ function Apple:new(px, py)
     local public = Block.new(self, px, py)
     local private = {}
 
-    function public:isCoordsOnIt(x, y)
-        local px, py = public:getPosition()
-        return px == x and py == y
-    end
 
     function public:getType()
         return "apple"

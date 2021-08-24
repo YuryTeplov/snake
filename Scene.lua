@@ -9,6 +9,7 @@ function Scene:new()
 
     private.head = Head:new(1, 1)
     private.actors = {}
+    private.score = 0
 
     table.insert(private.actors, Apple:new(4, 4))
 
@@ -19,6 +20,17 @@ function Scene:new()
     function public:load()
 
     end
+
+    function private:checkCollisions()
+        for k,v in pairs(private.actors) do
+            if v:checkCollisions(private.head:getPosition()) then
+                if v:getType() == "apple" then
+                    private.score = private.score + 1
+                end
+            end
+        end
+    end
+
 
     function public:update(dt)
         private.dtBatery = private.dtBatery + dt
