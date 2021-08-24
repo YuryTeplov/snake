@@ -32,6 +32,8 @@ function Scene:new()
                     apple:changePosition(1, 1)
 
                     table.insert(private.actors, Body:new(private.actors[#private.actors]))
+                elseif v:getType() == "body" then
+                    love.window.close()
                 end
             end
         end
