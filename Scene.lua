@@ -30,6 +30,10 @@ function Scene:new()
         private.head:draw()
     end
 
+    function public:control(key)
+        private.head:control(key)
+    end
+
     setmetatable(public, self)
     self.__index = self; return public
 end

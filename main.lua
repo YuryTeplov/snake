@@ -11,3 +11,7 @@ end
 function love.draw()
     scene:draw()
 end
+
+function love.keypressed(key, scancode, isrepeat)
+    scene:control(key)
+end
