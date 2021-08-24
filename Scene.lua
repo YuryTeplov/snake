@@ -26,6 +26,8 @@ function Scene:new()
             if v:checkCollisions(private.head:getPosition()) then
                 if v:getType() == "apple" then
                     private.score = private.score + 1
+                    local apple = private.actors[1]
+                    apple:changePosition(1, 1)
                 end
             end
         end
@@ -42,6 +44,9 @@ function Scene:new()
             for k,v in pairs(private.actors) do
                 v:tick()
             end
+
+            private:checkCollisions()
+
         end
     end
 
